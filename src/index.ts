@@ -102,6 +102,7 @@ const transformSourceCode = async (
 
 	const AST = parse(source, {
 		sourceType: 'module',
+		plugins: ['@babel/plugin-syntax-jsx'],
 	});
 
 	if (!AST) {
@@ -160,14 +161,14 @@ const transformSourceCode = async (
 	}
 
 	// Write the transformed source code to a .scraipt file
-	const scraiptPath = insertBeforeExtension(path, '.scraipt');
-	fs.writeFileSync(scraiptPath, transformedSource);
+	// const scraiptPath = insertBeforeExtension(path, '.scraipt');
+	// fs.writeFileSync(scraiptPath, transformedSource);
 
 	return transformedSource;
 };
 
 export default (source: string) => {
-	createScraiptFolder();
+	// createScraiptFolder();
 
 	const fileName = __filename.split('/').pop(); // TODO: DO NOT USE A HARD CODED OUTPUT DIR
 

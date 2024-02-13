@@ -13,7 +13,9 @@
   "main": "src/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "cd test-apps/webpack && npm run build",
+    "start": "npm run test-react && npm run test-webpack",
+    "test-react": "cd example-apps/react && npm run build",
+    "test-webpack": "cd example-apps/webpack && npm run build",
     "test": "eslint --ext .jsx,.js && npm run build && npm run start"
   },
   "author": "cadenmarinozzi",
@@ -30,6 +32,7 @@
     "@types/babel__core": "^7.20.5",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
+    "@babel/plugin-syntax-jsx": "^7.23.3",
     "eslint": "^8.56.0",
     "typescript": "^5.3.3",
     "webpack": "^5.90.1"
@@ -37,6 +40,7 @@
   "dependencies": {
     "@babel/cli": "^7.23.9",
     "@babel/core": "^7.23.9",
+    "@babel/plugin-syntax-jsx": "^7.23.3",
     "@babel/preset-env": "^7.23.9",
     "@babel/traverse": "^7.23.9",
     "dotenv": "^16.4.3",
