@@ -2,6 +2,14 @@
   "name": "scraipt",
   "version": "1.0.0",
   "description": "AI JavaScript code optimization",
+  "keywords": [
+    "scraipt",
+    "javascript",
+    "optimization",
+    "ai",
+    "code-optimization",
+    "optimization-tools"
+  ],
   "main": "src/index.js",
   "scripts": {
     "build": "tsc",
@@ -9,6 +17,10 @@
     "test": "eslint --ext .jsx,.js && npm run build && npm run start"
   },
   "author": "cadenmarinozzi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cadenmarinozzi/scraipt"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.23.9",
