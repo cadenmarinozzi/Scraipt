@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "cd test-apps/webpack && npm run build",
-    "test": "npm run build && npm run start"
+    "test": "eslint --ext .jsx,.js && npm run build && npm run start"
   },
   "author": "cadenmarinozzi",
   "license": "MIT",
@@ -16,6 +16,9 @@
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
     "@types/babel__core": "^7.20.5",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
     "typescript": "^5.3.3",
     "webpack": "^5.90.1"
   },
