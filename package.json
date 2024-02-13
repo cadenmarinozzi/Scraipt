@@ -1,6 +1,6 @@
 {
   "name": "scraipt",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Scrape away inefficient code during compile-time using AI",
   "keywords": [
     "scraipt",
@@ -19,7 +19,8 @@
     "start": "npm run test-react && npm run test-webpack",
     "test-react": "cd example-apps/react && npm run build",
     "test-webpack": "cd example-apps/webpack && npm run build",
-    "test": "eslint --ext .jsx,.js && npm run build && npm run start"
+    "test": "eslint --ext .jsx,.js && npm run build && npm run start",
+    "publish": "npm run build && npm publish"
   },
   "author": "cadenmarinozzi",
   "repository": {
