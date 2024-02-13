@@ -59,13 +59,14 @@ export class OpenAIAPI {
 			model: 'gpt-4',
 		});
 
-		const choices = result.choices;
+		const choices: OpenAI.Chat.Completions.ChatCompletion.Choice[] =
+			result.choices;
 
 		if (!choices) {
 			return;
 		}
 
-		const content = choices[0].message.content;
+		const content: string | null = choices[0].message.content;
 
 		if (!content) {
 			return;

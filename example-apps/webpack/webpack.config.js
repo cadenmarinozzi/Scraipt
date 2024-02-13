@@ -20,7 +20,7 @@ module.exports = {
 	},
 	resolveLoader: {
 		alias: {
-			scraipt: path.resolve(__dirname, '../../build/index.js'),
+			scraipt: path.resolve(__dirname, '../../dist/index.js'),
 		},
 	},
 };
