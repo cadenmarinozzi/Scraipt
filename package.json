@@ -1,0 +1,30 @@
+{
+  "name": "scraipt",
+  "version": "1.0.0",
+  "description": "AI JavaScript code optimization",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "cd test-apps/webpack && npm run build",
+    "test": "npm run build && npm run start"
+  },
+  "author": "cadenmarinozzi",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-typescript": "^7.23.3",
+    "@types/babel__core": "^7.20.5",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/traverse": "^7.23.9",
+    "dotenv": "^16.4.3",
+    "openai": "^4.27.1"
+  }
+}
