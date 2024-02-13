@@ -19,8 +19,7 @@
     "start": "npm run test-react && npm run test-webpack",
     "test-react": "cd example-apps/react && npm run build",
     "test-webpack": "cd example-apps/webpack && npm run build",
-    "test": "eslint --ext .jsx,.js && npm run build && npm run start",
-    "publish": "npm run build && npm publish"
+    "test": "eslint --ext .jsx,.js && npm run build && npm run start"
   },
   "author": "cadenmarinozzi",
   "repository": {
