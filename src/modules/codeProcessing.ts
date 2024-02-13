@@ -22,15 +22,29 @@ export const getSourceAtLine = (source: string, line: number): string => {
 };
 
 /**
+    Parse the given source code into an AST.
+    * @param source The source code to parse.
+    * @returns The parse result.
+*/
+export const parseSource = (source: string) => {
+	// TODO: Add return type
+	return parse(source, {
+		sourceType: 'module',
+		plugins: [
+			'@babel/plugin-syntax-jsx',
+			'@babel/plugin-transform-typescript',
+		],
+	});
+};
+
+/**
     Check if the given source code is valid JavaScript.
     * @param source The source code to check.
     * @returns True if the source code is valid JavaScript, false otherwise.
 */
 export const isValidJavaScript = (source: string): boolean => {
 	try {
-		parse(source, {
-			sourceType: 'module',
-		});
+		parseSource(source);
 	} catch (error) {
 		return false;
 	}

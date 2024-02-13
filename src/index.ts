@@ -10,6 +10,7 @@ import {
 	getSourceAtLine,
 	createFunction,
 	isValidJavaScript,
+	parseSource,
 } from './modules/codeProcessing';
 import { createScraiptFolder, writeScraiptFile } from './modules/fileUtils';
 
@@ -51,10 +52,7 @@ const transformSourceCode = async (source: string): Promise<string> => {
 		return source;
 	}
 
-	const AST = parse(source, {
-		sourceType: 'module',
-		plugins: ['@babel/plugin-syntax-jsx'],
-	});
+	const AST = parseSource(source);
 
 	if (!AST) {
 		return source;
@@ -100,9 +98,7 @@ const transformSourceCode = async (source: string): Promise<string> => {
 					return;
 				}
 
-				const completionAST = parse(completion, {
-					sourceType: 'module',
-				});
+				const completionAST = parseSource(completion);
 
 				if (!completionAST) {
 					return;
