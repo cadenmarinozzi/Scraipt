@@ -1,6 +1,6 @@
 {
   "name": "scraipt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scrape away inefficient code during compile-time using AI",
   "keywords": [
     "scraipt",
@@ -10,7 +10,10 @@
     "code-optimization",
     "optimization-tools"
   ],
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "npm run test-react && npm run test-webpack",
