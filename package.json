@@ -1,7 +1,7 @@
 {
   "name": "scraipt",
   "version": "1.0.0",
-  "description": "AI JavaScript code optimization",
+  "description": "Scrape away inefficient code during compile-time using AI",
   "keywords": [
     "scraipt",
     "javascript",
