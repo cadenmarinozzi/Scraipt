@@ -88,6 +88,8 @@ module.exports = {
 ...
 ```
 
+Finally, update your `package.json` file to use `craco` instead of `react-scripts` by replacing the `start`, `build`, `test`, and `eject` scripts with the following
+
 ```json
 {
 	"scripts": {
