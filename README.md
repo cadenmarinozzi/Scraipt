@@ -88,17 +88,13 @@ module.exports = {
 ...
 ```
 
-Finally, update your `package.json` file to use `craco` instead of `react-scripts` by replacing the `start`, `build`, `test`, and `eject` scripts with the following (Replacing "..." with your existing configuration):
-
 ```json
 {
-    ...
-    "scripts": {
-        "start": "craco start",
-        "build": "craco build",
-        "test": "craco test",
-    },
-    ...
+	"scripts": {
+		"start": "craco start",
+		"build": "craco build",
+		"test": "craco test"
+	}
 }
 ```
 
@@ -134,6 +130,12 @@ Clone the repository:
 git clone https://github.com/cadenmarinozzi/Scraipt.git
 ```
 
+cd into the project directory:
+
+```bash
+cd Scraipt
+```
+
 Install dependencies:
 
 ```bash
@@ -157,6 +159,16 @@ npm run test
 This will run eslint on the project, build the project and run the example apps. If the tests do not complete successfully, something is wrong.
 
 If you receive a "OpenAI API key not found" error, add your ``.env` file to each test project in "example-apps".
+
+## Debug output
+
+While testing, if you want to see the source code the AI has generated, add the following to your `.env` file:
+
+```env
+DEBUG=true
+```
+
+After running the tests, you will see the generated code in the `dist/scraipt` directory.
 
 # Potential Issues
 
