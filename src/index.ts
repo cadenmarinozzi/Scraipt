@@ -2,9 +2,9 @@
 import { config } from 'dotenv';
 config();
 
-import { Node, parse, traverse } from '@babel/core';
+import { Node, NodePath, parse, traverse } from '@babel/core';
 import generate from '@babel/generator';
-import { OpenAIAPI } from './modules/OpenAI';
+import { OpenAIAPI } from './modules/OpenAI/OpenAI';
 import { FunctionDeclaration } from '@babel/types';
 import {
 	getSourceAtLine,
@@ -15,12 +15,10 @@ import {
 import { createScraiptFolder, writeScraiptFile } from './modules/fileUtils';
 import { Cache } from './modules/cache';
 import { minimatch } from 'minimatch';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 const openai = new OpenAIAPI();
 const cache = new Cache();
-
-const isDebug = process.env.DEBUG === 'true';
 
 /**
     If the line above the node contains a comment with the text "scraipt-pass", the node should be left as is.
@@ -56,15 +54,7 @@ const transformSourceCode = async (
 	options: any,
 	resourcePath: any
 ): Promise<string> => {
-	if (!source) {
-		return source;
-	}
-
-	if (!options) {
-		return source;
-	}
-
-	if (!resourcePath) {
+	if (!source || !options || !resourcePath) {
 		return source;
 	}
 
@@ -98,10 +88,13 @@ const transformSourceCode = async (
 
 	traverse(AST, {
 		// No need for asynchroneous execution as we can just run the code synchronously and wait for the result since we aren't modifying the AST
-		enter(path) {
+		enter(path: NodePath) {
 			const worker = async () => {
+				const isArrowFunction: boolean =
+					path.isArrowFunctionExpression();
+
 				// If the node is not a function, skip it
-				if (!path.isFunctionDeclaration()) return;
+				if (!path.isFunctionDeclaration() && !isArrowFunction) return;
 
 				const node: Node = path.node;
 
@@ -173,7 +166,7 @@ const transformSourceCode = async (
 					return;
 				}
 
-				const originalNodeBodyAST = node.body;
+				const originalNodeBodyAST = (<FunctionDeclaration>node).body;
 				const originalNodeBody: string =
 					generate(originalNodeBodyAST).code;
 
@@ -188,17 +181,18 @@ const transformSourceCode = async (
 					.split('(')[1]
 					.split(')')[0];
 
-				const nodeName: string | undefined = node.id?.name;
+				let nodeName: string | undefined;
 
-				if (!nodeName) {
-					return;
+				if (!isArrowFunction) {
+					nodeName = (<FunctionDeclaration>node).id?.name;
 				}
 
 				const transformedNodeSource: string = createFunction(
 					nodeName,
 					originalParams,
 					completionBody,
-					originalNodeBody
+					originalNodeBody,
+					isArrowFunction
 				);
 
 				// Replace the original source code with the optimized version
@@ -222,8 +216,8 @@ const transformSourceCode = async (
 		return source;
 	}
 
-	if (isDebug) {
-		writeScraiptFile(__filename, transformedSource);
+	if (options.debug) {
+		writeScraiptFile(resourcePath, transformedSource, options.buildPath);
 	}
 
 	if (options.dryRun) {
@@ -243,8 +237,8 @@ module.exports = function (source: string) {
 	const options = (<any>this).getOptions();
 	const resourcePath = (<any>this).resourcePath;
 
-	if (isDebug) {
-		createScraiptFolder();
+	if (options.debug) {
+		createScraiptFolder(options.buildPath);
 	}
 
 	return transformSourceCode(source, options, resourcePath);

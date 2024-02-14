@@ -5,6 +5,8 @@
 -   Improve context to use similarity
 -   Handle AI response that includes more than just the code
 -   Performance benchmarks
--   Allow usage of multiple AI models
+-   Allow usage of multiple AI models based on context
 -   Add support for glob patterns in include
--   Dynamically limit tokens based on the model
+-   Create module extender method for plug-and-play
+-   Create a logs file
+-   Add support for more webpack frameworks (Next, etc)

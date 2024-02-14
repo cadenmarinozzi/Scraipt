@@ -15,11 +15,12 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build-production": "webpack --mode production",
+    "build-dev": "tsc",
     "start": "npm run test-react && npm run test-webpack",
     "test-react": "cd example-apps/react && npm run build",
     "test-webpack": "cd example-apps/webpack && npm run build",
-    "test": "eslint --ext .jsx,.js && npm run build && npm run start"
+    "test": "eslint --ext .jsx,.js && npm run build-dev && npm run start"
   },
   "author": "cadenmarinozzi",
   "repository": {
@@ -39,8 +40,10 @@
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "eslint": "^8.56.0",
+    "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
-    "webpack": "^5.90.1"
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@babel/cli": "^7.23.9",
@@ -53,6 +56,7 @@
     "gpt-tokenizer": "^2.1.2",
     "ignore": "^5.3.1",
     "minimatch": "^9.0.3",
+    "node-polyfill-webpack-plugin": "^3.0.0",
     "openai": "^4.27.1"
   }
 }

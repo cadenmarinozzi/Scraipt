@@ -83,10 +83,20 @@ export const isValidJavaScript = (source: string): boolean => {
     * @returns The function as a string.
 */
 export const createFunction = (
-	name: string,
+	name: string | undefined,
 	params: string,
 	transformedBody: string,
-	originalBody: string
+	originalBody: string,
+	isArrowFunction: boolean
 ): string => {
-	return `function ${name}(${params}) {\ntry\n${transformedBody}\ncatch (error)\n${originalBody}\n}`;
+	// TODO: Function type (const, let, etc)
+	if (isArrowFunction) {
+		return `(${params}) => {\ntry\n${transformedBody}\ncatch (error)\n${originalBody}\n}`;
+	}
+
+	if (name) {
+		return `function ${name}(${params}) {\ntry\n${transformedBody}\ncatch (error)\n${originalBody}\n}`;
+	}
+
+	return `function (${params}) {\ntry\n${transformedBody}\ncatch (error)\n${originalBody}\n}`;
 };

@@ -1,10 +1,6 @@
 const path = require('path');
 
 module.exports = {
-	context: __dirname,
-	node: {
-		__filename: true,
-	},
 	entry: './src/index.js',
 	output: {
 		filename: 'bundle.js',
@@ -19,9 +15,10 @@ module.exports = {
 						loader: 'scraipt',
 						options: {
 							include: ['src'],
-							model: 'gpt-4',
-							maxTokens: 10000,
-							dryRun: true,
+							model: 'gpt-3.5-turbo',
+							maxTokens: 20000,
+							dryRun: false,
+							debug: true,
 						},
 					},
 				],

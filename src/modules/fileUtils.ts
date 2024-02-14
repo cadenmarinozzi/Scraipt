@@ -24,14 +24,35 @@ export const insertBeforeExtension = (
 };
 
 /**
-    Create a folder for outputting the transformed source code.
+	Get the scraipt build directory.
+	* @param buildPath The path of the build directory.
+	* @returns The scraipt build directory.
 */
-export const createScraiptFolder = () => {
-	if (fs.existsSync('dist/scraipt')) {
+const getScraiptDir = (buildPath: string | undefined): string => {
+	if (!buildPath) {
+		buildPath = 'dist';
+
+		// If the default build path does not exist, and none is in the options, throw an error
+		if (!fs.existsSync(buildPath)) {
+			fs.mkdirSync(buildPath);
+		}
+	}
+
+	return path.join(buildPath, 'scraipt');
+};
+
+/**
+    Create a folder for outputting the transformed source code.
+	* @param buildPath The path of the build directory.
+*/
+export const createScraiptFolder = (buildPath: string) => {
+	const scraiptDir: string = getScraiptDir(buildPath);
+
+	if (fs.existsSync(scraiptDir)) {
 		return;
 	}
 
-	fs.mkdirSync('dist/scraipt');
+	fs.mkdirSync(scraiptDir);
 };
 
 /**
@@ -40,14 +61,20 @@ export const createScraiptFolder = () => {
  * @param data The data to write to the file
  * @returns
  */
-export const writeScraiptFile = (filePath: string, data: string) => {
+export const writeScraiptFile = (
+	filePath: string,
+	data: string,
+	buildPath: string
+) => {
 	const fileName: string | undefined = filePath.split('/').pop();
 
 	if (!fileName) {
 		return;
 	}
 
-	const sourcePath: string = path.join('dist', 'scraipt', fileName);
+	const scraiptDir: string = getScraiptDir(buildPath);
+
+	const sourcePath: string = path.join(scraiptDir, fileName);
 
 	if (!sourcePath) {
 		return;

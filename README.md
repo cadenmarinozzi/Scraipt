@@ -32,10 +32,6 @@ Add the following to your `webpack.config.js` file (Replacing "// ..." with your
 // ...
 module.exports = {
 	// ...
-	context: __dirname,
-	node: {
-		__filename: true,
-	},
 	module: {
 		rules: [
 			{
@@ -69,10 +65,6 @@ module.exports = {
 	// ...
 	webpack: {
 		configure: {
-			context: __dirname,
-			node: {
-				__filename: true,
-			},
 			module: {
 				rules: [
 					{
@@ -120,10 +112,6 @@ To configure Scraipt, add an `options` array to your `webpack.config.js` or `cra
 module.exports = {
 	webpack: {
 		configure: {
-			context: __dirname,
-			node: {
-				__filename: true,
-			},
 			module: {
 				rules: [
 					{
@@ -174,6 +162,17 @@ module.exports = {
     -   Default: No limit
     -   Example: `1000`
 
+-   `debug <Boolean>`
+
+    -   Write the optimized code to the build folder.
+    -   Default: `false`
+    -   Example: `true`
+
+-   `buildPath <Array>`
+    -   The path to write the optimized debug code to.
+    -   Default: `dist`
+    -   Example: `build`
+
 ## Ignoring Functions
 
 If you would like to ignore a function from being optimized, add the following comment to the top of the function:
@@ -216,10 +215,14 @@ Install dependencies:
 npm install
 ```
 
-Build the project:
+Build the project for either development or production:
 
 ```bash
-npm run build
+npm run build-dev # Development (Uses tsc)
+```
+
+```bash
+npm run build-production # Production (Uses webpack)
 ```
 
 ## Testing
@@ -233,14 +236,6 @@ npm run test
 This will run eslint on the project, build the project and run the example apps. If the tests do not complete successfully, something is wrong.
 
 If you receive a `OpenAI API key not found` error, add your `.env` file to each test project in `example-apps`.
-
-## Debug output
-
-While testing, if you want to see the source code the AI has generated, add the following to your `.env` file:
-
-```env
-DEBUG=true
-```
 
 After running the tests, you will see the generated code in the `dist/scraipt` directory.
 

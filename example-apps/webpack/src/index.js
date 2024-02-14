@@ -33,6 +33,15 @@ function findLargestNumber(array, target) {
 }
 
 console.log(findLargestNumber(array));
-console.log(findLargestNumber(array));
-console.log(findLargestNumber(array));
-console.log(findLargestNumber(array));
+
+const getAverageOfArray = (array) => {
+	let sum = 0;
+
+	array.forEach((item) => {
+		sum += item;
+	});
+
+	return sum / array.length;
+};
+
+console.log(getAverageOfArray(array));
