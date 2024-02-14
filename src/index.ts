@@ -2,7 +2,7 @@
 import { config } from 'dotenv';
 config();
 
-import { Node, NodePath, parse, traverse } from '@babel/core';
+import { Node, NodePath, traverse } from '@babel/core';
 import generate from '@babel/generator';
 import { OpenAIAPI } from './modules/OpenAI/OpenAI';
 import { FunctionDeclaration } from '@babel/types';
@@ -14,7 +14,6 @@ import {
 } from './modules/codeProcessing';
 import { createScraiptFolder, writeScraiptFile } from './modules/fileUtils';
 import { Cache } from './modules/cache';
-import { minimatch } from 'minimatch';
 import chalk from 'chalk';
 
 const openai = new OpenAIAPI();
@@ -52,7 +51,7 @@ const shouldPassNode = (node: Node, source: string): boolean => {
 const transformSourceCode = async (
 	source: string,
 	options: any,
-	resourcePath: any
+	resourcePath: string
 ): Promise<string> => {
 	if (!source || !options || !resourcePath) {
 		return source;
