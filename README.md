@@ -3,7 +3,7 @@
 <div align="center"><strong>
 Scrape away inefficient code using AI to optimize your code automatically.</strong>
 <br />
-Scraipt easily integrates with your code's compilation process and optimizes each function using AI during compilation.
+Scraipt easily integrates with your code's compilation process and optimizes each function using AI.
 <br /><br />
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/cadenmarinozzi/Scraipt/blob/main/LICENSE) [![Npm package version](https://badge.fury.io/js/scraipt.svg)](https://npmjs.com/package/scraipt) [![Code Grade](https://www.codefactor.io/Content/badges/A.svg)](https://www.codefactor.io/repository/github/cadenmarinozzi/Scraipt)
