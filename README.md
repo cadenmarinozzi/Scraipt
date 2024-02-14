@@ -165,7 +165,7 @@ module.exports = {
 
     -   The OpenAI model to use.
     -   Default: `gpt-4`
-    -   Example: 'gpt-3.5-turbo'
+    -   Example: `gpt-3.5-turbo``
 
 -   `maxTokens <Number>`
 
