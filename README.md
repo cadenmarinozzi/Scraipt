@@ -235,9 +235,9 @@ npm run test
 
 This will run eslint on the project, build the project and run the example apps. If the tests do not complete successfully, something is wrong.
 
-If you receive a `OpenAI API key not found` error, add your `.env` file to each test project in `example-apps`.
+If you receive an `OpenAI API key not found` error, add your `.env` file to each test project in `example-apps`.
 
-After running the tests, you will see the generated code in the `dist/scraipt` directory.
+After running the tests, you will see the generated code in the `<buildPath>/scraipt` directory.
 
 # Potential Issues
 
