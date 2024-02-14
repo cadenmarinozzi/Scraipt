@@ -1,10 +1,28 @@
 # Scraipt
 
-Scraipt scrapes away inefficient code using AI to optimize your code automatically.
+<div align="center"><strong>
+Scrape away inefficient code using AI to optimize your code automatically.</strong>
+<br />
+Scraipt easily integrates with your code's compilation process and optimizes each function using AI during compilation.
+<br /><br />
 
-## What does Scraipt do?
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/cadenmarinozzi/Scraipt/blob/main/LICENSE) [![Npm package version](https://badgen.net/npm/v/scraipt)](https://npmjs.com/package/scraipt)
 
-Scraipt integrates with your code's compilation process and optimizes each function using AI during compilation.
+</div>
+
+# Table of Contents
+
+-   [Installation](#installation)
+-   [Usage](#usage)
+    -   [Webpack](#webpack)
+    -   [create-react-app](#create-react-app)
+    -   [Configuration](#configuration)
+    -   [Ignoring Functions](#ignoring-functions)
+-   [Building](#building)
+    -   [Testing](#testing)
+-   [Potential Issues](#potential-issues)
+-   [TODO](#todo)
+-   [License](#license)
 
 # Installation
 
