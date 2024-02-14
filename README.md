@@ -132,6 +132,7 @@ module.exports = {
 							{
 								loader: 'scraipt',
 								options: {
+									// <-- Add this
 									include: ['src'], // Only include files in the "src" directory
 									dryRun: true, // Run Scraipt without optimizing the code
 								},
@@ -231,7 +232,7 @@ npm run test
 
 This will run eslint on the project, build the project and run the example apps. If the tests do not complete successfully, something is wrong.
 
-If you receive a "OpenAI API key not found" error, add your ``.env` file to each test project in "example-apps".
+If you receive a `OpenAI API key not found` error, add your `.env` file to each test project in `example-apps`.
 
 ## Debug output
 
