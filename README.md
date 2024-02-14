@@ -26,12 +26,12 @@ OPENAI_API_KEY=your-api-key
 
 If your project does not already have a webpack configuration, create a new file called `webpack.config.js` in the root of your project.
 
-Add the following to your `webpack.config.js` file (Replacing "..." with your existing configuration):
+Add the following to your `webpack.config.js` file (Replacing "// ..." with your existing configuration):
 
 ```javascript
-...
+// ...
 module.exports = {
-    ...
+	// ...
 	context: __dirname,
 	node: {
 		__filename: true,
@@ -44,9 +44,9 @@ module.exports = {
 			},
 		],
 	},
-    ...
+	// ...
 };
-...
+// ...
 ```
 
 ## create-react-app
@@ -61,31 +61,38 @@ npm install @craco/craco
 
 Then, create a new file called `craco.config.js` in the root of your project if you don't already have one.
 
-Add the following to your `craco.config.js` file (Replacing "..." with your existing configuration):
+Add the following to your `craco.config.js` file (Replacing "// ..." with your existing configuration):
 
 ```javascript
-...
+// ...
 module.exports = {
-    ...
-    webpack: {
-        configure: {
-            context: __dirname,
-            node: {
-                __filename: true,
-            },
-            module: {
-                rules: [
-                    {
-                        test: /.[jt]sx*/,
-                        use: ['scraipt'],
-                    },
-                ],
-            },
-        },
-    },
-    ...
+	// ...
+	webpack: {
+		configure: {
+			context: __dirname,
+			node: {
+				__filename: true,
+			},
+			module: {
+				rules: [
+					{
+						test: /.[jt]sx*/,
+						use: [
+							{
+								loader: 'scraipt',
+								options: {
+									include: ['src'],
+								},
+							},
+						],
+					},
+				],
+			},
+		},
+	},
+	// ...
 };
-...
+// ...
 ```
 
 Finally, update your `package.json` file to use `craco` instead of `react-scripts` by replacing the `start`, `build`, `test`, and `eject` scripts with the following
@@ -101,6 +108,70 @@ Finally, update your `package.json` file to use `craco` instead of `react-script
 ```
 
 You can now run `npm start` and `npm run build` as you normally would, and Scraipt will optimize your code.
+
+## Configuration
+
+To configure Scraipt, add an `options` array to your `webpack.config.js` or `craco.config.js` file.
+
+### Example
+
+```javascript
+// ...
+module.exports = {
+	webpack: {
+		configure: {
+			context: __dirname,
+			node: {
+				__filename: true,
+			},
+			module: {
+				rules: [
+					{
+						test: /.[jt]sx*/,
+						use: [
+							{
+								loader: 'scraipt',
+								options: {
+									include: ['src'], // Only include files in the "src" directory
+									dryRun: true, // Run Scraipt without optimizing the code
+								},
+							},
+						],
+					},
+				],
+			},
+		},
+	},
+	// ...
+};
+// ...
+```
+
+### Options
+
+-   `include <Array>`
+
+    -   An array of directories to include in the optimization process. If using `create-react-app`, you may only want to include the `src` directory.
+    -   Default: All files in the project directory.
+    -   Example: `['src']`
+
+-   `dryRun <Boolean>`
+
+    -   Run Scraipt without optimizing the code. This is useful for testing Scraipt without modifying your code. This will also print the names of the files that would be optimized.
+    -   Default: `false`
+    -   Example: `true`
+
+-   `model <String>`
+
+    -   The OpenAI model to use.
+    -   Default: `gpt-4`
+    -   Example: 'gpt-3.5-turbo'
+
+-   `maxTokens <Number>`
+
+    -   The maximum number of tokens to use in total for all functions.
+    -   Default: No limit
+    -   Example: `1000`
 
 ## Ignoring Functions
 

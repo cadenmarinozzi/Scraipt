@@ -22,18 +22,40 @@ export const getSourceAtLine = (source: string, line: number): string => {
 };
 
 /**
+    Check if the given source code is TypeScript.
+    * @param source The source code to check.
+    * @returns True if the source code is TypeScript, false otherwise.
+*/
+export const isTypeScriptCode = (source: string): boolean => {
+	try {
+		const AST = parse(source, {
+			sourceType: 'module',
+			plugins: ['@babel/plugin-syntax-jsx'],
+		});
+
+		return !!!AST;
+	} catch (error) {
+		return true;
+	}
+};
+
+/**
     Parse the given source code into an AST.
     * @param source The source code to parse.
     * @returns The parse result.
 */
 export const parseSource = (source: string) => {
+	const isTypeScript: boolean = isTypeScriptCode(source);
+	const plugins: string[] = ['@babel/plugin-syntax-jsx'];
+
+	if (isTypeScript) {
+		plugins.push('@babel/plugin-transform-typescript');
+	}
+
 	// TODO: Add return type
 	return parse(source, {
 		sourceType: 'module',
-		plugins: [
-			'@babel/plugin-syntax-jsx',
-			'@babel/plugin-transform-typescript',
-		],
+		plugins,
 	});
 };
 

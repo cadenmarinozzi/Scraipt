@@ -14,7 +14,17 @@ module.exports = {
 		rules: [
 			{
 				test: /.[jt]sx*/,
-				use: ['scraipt'],
+				use: [
+					{
+						loader: 'scraipt',
+						options: {
+							include: ['src'],
+							model: 'gpt-4',
+							maxTokens: 10000,
+							dryRun: true,
+						},
+					},
+				],
 			},
 		],
 	},

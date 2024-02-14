@@ -13,8 +13,12 @@ import {
 	parseSource,
 } from './modules/codeProcessing';
 import { createScraiptFolder, writeScraiptFile } from './modules/fileUtils';
+import { Cache } from './modules/cache';
+import { minimatch } from 'minimatch';
+import * as chalk from 'chalk';
 
 const openai = new OpenAIAPI();
+const cache = new Cache();
 
 const isDebug = process.env.DEBUG === 'true';
 
@@ -47,9 +51,39 @@ const shouldPassNode = (node: Node, source: string): boolean => {
     * @param path The path of the source code. If not provided, the source code will not be written to a file.
     * @returns The transformed source code.
 */
-const transformSourceCode = async (source: string): Promise<string> => {
+const transformSourceCode = async (
+	source: string,
+	options: any,
+	resourcePath: any
+): Promise<string> => {
 	if (!source) {
 		return source;
+	}
+
+	if (!options) {
+		return source;
+	}
+
+	if (!resourcePath) {
+		return source;
+	}
+
+	// Setup OpenAI parameters
+	const model: string = options.model ?? 'gpt-4';
+	openai.maxTokenCount = options.maxTokens;
+
+	// Only include files listed in the include option
+	if (options.include) {
+		for (const include of options.include) {
+			if (!resourcePath.includes(include)) {
+				return source;
+			}
+
+			// TODO: minimatch for glob patterns
+			// if (!minimatch(resourcePath, include)) {
+			// 	return source;
+			// }
+		}
 	}
 
 	const AST = parseSource(source);
@@ -85,14 +119,30 @@ const transformSourceCode = async (source: string): Promise<string> => {
 					return;
 				}
 
+				// Check for the node in the cache
+				const cachedNode: string | undefined = cache.get(nodeSource);
+
+				if (cachedNode) {
+					transformedSource = source.replace(nodeSource, cachedNode);
+
+					return;
+				}
+
+				// Source with the node removed
+				// TODO: This is a bit janky, we should use the AST to remove the node instead of using string manipulation
+				const sourceContext: string = source.replace(nodeSource, '');
+
+				if (options.dryRun) {
+					return;
+				}
+
 				// Generate the optimized version of the code
 				const completion: string | undefined =
-					await openai.createTextCompletion([
-						{
-							role: 'user',
-							content: nodeSource,
-						},
-					]);
+					await openai.createTextCompletion(
+						sourceContext,
+						nodeSource,
+						model
+					);
 
 				if (!completion) {
 					return;
@@ -156,6 +206,9 @@ const transformSourceCode = async (source: string): Promise<string> => {
 					nodeSource,
 					transformedNodeSource
 				);
+
+				// Add to the cache
+				cache.set(nodeSource, transformedNodeSource);
 			};
 
 			workers.push(worker);
@@ -173,14 +226,26 @@ const transformSourceCode = async (source: string): Promise<string> => {
 		writeScraiptFile(__filename, transformedSource);
 	}
 
+	if (options.dryRun) {
+		console.log(
+			`${chalk.blue('Scraipt')} Would have wrote: ${resourcePath}`
+		);
+
+		return source;
+	}
+
 	return transformedSource;
 };
 
 // Main webpack loader function
-export default (source: string) => {
+module.exports = function (source: string) {
+	// Not sure why but "this" needs to be casted to "any" to avoid type errors
+	const options = (<any>this).getOptions();
+	const resourcePath = (<any>this).resourcePath;
+
 	if (isDebug) {
 		createScraiptFolder();
 	}
 
-	return transformSourceCode(source);
+	return transformSourceCode(source, options, resourcePath);
 };
