@@ -33,7 +33,7 @@ export const isTypeScriptCode = (source: string): boolean => {
 			plugins: ['@babel/plugin-syntax-jsx'],
 		});
 
-		return !!!AST;
+		return !AST;
 	} catch (error) {
 		return true;
 	}
