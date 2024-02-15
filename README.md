@@ -1,5 +1,9 @@
 # Scraipt
 
+<div align=center>
+<img src='./assets/Logo.png' width=100 />
+</div>
+
 <div align="center"><strong>
 Scrape away inefficient code using AI to optimize your code automatically.</strong>
 <br />
