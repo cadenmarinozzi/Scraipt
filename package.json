@@ -1,6 +1,6 @@
 {
   "name": "scraipt",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Scrape away inefficient code during compile-time using AI",
   "keywords": [
     "scraipt",
