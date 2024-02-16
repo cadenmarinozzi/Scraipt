@@ -21,6 +21,7 @@ Scraipt easily integrates with your code's compilation process and optimizes eac
     -   [Webpack](#webpack)
     -   [create-react-app](#create-react-app)
     -   [Configuration](#configuration)
+    -   [Functional Usage][#functional-usage]
     -   [Ignoring Functions](#ignoring-functions)
 -   [Building](#building)
     -   [Testing](#testing)
@@ -191,9 +192,47 @@ module.exports = {
     -   Example: `true`
 
 -   `buildPath <Array>`
+
     -   The path to write the optimized debug code to.
     -   Default: `dist`
     -   Example: `build`
+
+## Functional Usage
+
+Scraipt can also be used easily with a functional approach. To do so, import `useScraipt` from the `scraipt` library and call it with your webpack configuration.
+
+`useScraipt(webpackConfig <optional Object>, options <optional Object>, framework <optional String>) => WebpackConfig`
+
+-   `webpackConfig <optional Object>`
+
+    -   Your webpack configuration.
+    -   Default: `{}`
+
+-   `options <optional Object>`
+
+    -   The options to use with Scraipt. See [Configuration](#configuration) for a list of available options.
+    -   Default: `{}`
+
+-   `framework <optional String>`
+
+    -   Can be `React`, or `webpack`.
+    -   The framework you are using. Scraipt will try and automatically detect the framework you are using from the provided config, however, if it cannot, you can pass the framework as the third argument.
+    -   Default: Autodetect
+
+### Example
+
+```javascript
+const { useScraipt } = require('scraipt');
+
+module.exports = useScraipt(
+	{
+		// ... Your webpack configuration
+	},
+	{
+		model: 'gpt-3.5-turbo',
+	}
+);
+```
 
 ## Ignoring Functions
 

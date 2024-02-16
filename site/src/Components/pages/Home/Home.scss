@@ -1,0 +1,116 @@
+@use 'colors' as *;
+@use 'vars' as *;
+
+.home {
+    display: flex;
+    flex-direction: column;
+
+    gap: $spacing-large;
+
+    align-items: center;
+
+    .section {
+        display: flex;
+        flex-direction: column;
+
+        gap: $spacing-medium;
+
+        align-items: center;
+
+        .hero-container {
+            margin-top: 100px;
+
+            .hero-title {
+                color: $lightest;
+
+                font-size: 3rem;
+                font-weight: 800;
+
+                word-wrap: break-word;
+
+                width: 100px;
+
+                text-shadow: var(--shadow-elevation-medium);
+
+                * {
+                    font-size: 3rem;
+                    font-weight: 800;
+                }
+            }
+        }
+
+        @media (max-width: 800px) {
+            .hero-container {
+                margin-top: 0px;
+                text-align: center;
+            }
+        }
+
+        .copy-container {
+            background: rgba($dark, 0.5);
+
+            border-radius: 8px;
+            border: 1px solid $dark;
+
+            padding: $spacing-medium;
+
+            box-shadow: var(--shadow-elevation-medium);
+
+            display: flex;
+            flex-direction: row;
+
+            gap: $spacing-medium;
+
+            align-items: center;
+
+            cursor: pointer;
+
+            transition: $transition;
+
+            .sparkle {
+                transition: $transition;
+
+                opacity: 0;
+            }
+
+            .copy-icon {
+                transition: $transition;
+
+                opacity: 0;
+
+                color: $medium;
+
+                width: 0px;
+
+                transform: scaleX(0);
+                transform-origin: left;
+            }
+
+            .copy-text {
+                color: $medium;
+                transition: $transition;
+
+                opacity: 1;
+            }
+        }
+
+        .copy-container:hover {
+            .copy-icon {
+                opacity: 1;
+
+                width: 20px;
+                transform: scaleX(1);
+            }
+
+            .sparkle {
+                opacity: 1;
+            }
+        }
+
+        .caption {
+            margin: $spacing-large;
+
+            color: $medium;
+        }
+    }
+}

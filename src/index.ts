@@ -43,6 +43,18 @@ const shouldPassNode = (node: Node, source: string): boolean => {
 };
 
 /**
+	Create a source context by removing the node source from the source code.
+	* @param source The source code.
+	* @param nodeSource The source code of the node.
+	* @returns The source context.
+*/
+const createSourceContext = (source: string, nodeSource: string): string => {
+	// TODO: This is a bit janky, we should use the AST to remove the node instead of using string manipulation
+
+	return source.replace(nodeSource, '');
+};
+
+/**
     Transform the given source code to be more efficient and optimized using all available resources.
     * @param source The source code to transform.
     * @param path The path of the source code. If not provided, the source code will not be written to a file.
@@ -121,8 +133,9 @@ const transformSourceCode = async (
 				}
 
 				// Source with the node removed
-				// TODO: This is a bit janky, we should use the AST to remove the node instead of using string manipulation
-				const sourceContext: string = source.replace(nodeSource, '');
+				const sourceContext: string = createSourceContext
+					? createSourceContext(source, nodeSource)
+					: source;
 
 				if (options.dryRun) {
 					return;

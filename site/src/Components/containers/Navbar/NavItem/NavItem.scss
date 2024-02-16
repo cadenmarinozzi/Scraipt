@@ -1,0 +1,18 @@
+@use 'colors' as *;
+@use 'vars' as *;
+
+.nav-item {
+    cursor: pointer;
+
+    z-index: 1;
+
+    .label {
+        color: $medium;
+
+        transition: $transition;
+    }
+
+    .label:hover {
+        color: $lightest;
+    }
+}

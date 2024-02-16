@@ -1,0 +1,28 @@
+@use 'vars' as *;
+@use 'colors' as *;
+
+.background-radial-gradient {
+    background: radial-gradient(circle, rgba(40, 27, 78, 1) 0%, $background 85%);
+    position: fixed;
+
+    z-index: -1;
+
+    width: 100vw;
+    height: 500vh;
+
+    transform: translateY(-75%);
+    left: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+
+    gap: $spacing-large;
+
+    align-items: center;
+
+    .app {
+        margin-top: 70px;
+    }
+}
