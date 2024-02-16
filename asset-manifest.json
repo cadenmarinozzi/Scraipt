@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Scraipt/static/css/main.be28110f.css",
+    "main.css": "/Scraipt/static/css/main.7cdb587d.css",
     "main.js": "/Scraipt/static/js/main.7e08ec47.js",
     "static/media/Logo.png": "/Scraipt/static/media/Logo.0b293eacfc16d6095b71.png",
     "index.html": "/Scraipt/index.html",
-    "main.be28110f.css.map": "/Scraipt/static/css/main.be28110f.css.map",
+    "main.7cdb587d.css.map": "/Scraipt/static/css/main.7cdb587d.css.map",
     "main.7e08ec47.js.map": "/Scraipt/static/js/main.7e08ec47.js.map"
   },
   "entrypoints": [
-    "static/css/main.be28110f.css",
+    "static/css/main.7cdb587d.css",
     "static/js/main.7e08ec47.js"
   ]
 }
