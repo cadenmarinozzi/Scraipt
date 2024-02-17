@@ -21,7 +21,7 @@ Scraipt easily integrates with your code's compilation process and optimizes eac
     -   [Webpack](#webpack)
     -   [create-react-app](#create-react-app)
     -   [Configuration](#configuration)
-    -   [Functional Usage][#functional-usage]
+    -   [Functional Usage](#functional-usage)
     -   [Ignoring Functions](#ignoring-functions)
 -   [Building](#building)
     -   [Testing](#testing)
@@ -165,7 +165,7 @@ module.exports = {
 
     -   An array of directories to include in the optimization process. If using `create-react-app`, you may only want to include the `src` directory.
     -   Default: All files in the project directory.
-    -   Example: `['src']`
+    -   Example: `['src']` or if `useGlob` is enabled: `['**/src/*.js']`
 
 -   `dryRun <Boolean>`
 
@@ -196,6 +196,12 @@ module.exports = {
     -   The path to write the optimized debug code to.
     -   Default: `dist`
     -   Example: `build`
+
+-   `useGlob <Boolean>`
+
+    -   Use glob patterns in the include option.
+    -   Default: `false`
+    -   Example: `true`
 
 ## Functional Usage
 
@@ -230,13 +236,14 @@ module.exports = useScraipt(
 	},
 	{
 		model: 'gpt-3.5-turbo',
-	}
+	},
+	'webpack'
 );
 ```
 
 ## Ignoring Functions
 
-If you would like to ignore a function from being optimized, add the following comment to the top of the function:
+If you would like to ignore a function from being optimized, add the following comment to the line above the function:
 
 ```javascript
 // scraipt-ignore

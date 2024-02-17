@@ -15,6 +15,7 @@ import {
 import { createScraiptFolder, writeScraiptFile } from './modules/fileUtils';
 import { Cache } from './modules/cache';
 import chalk from 'chalk';
+import { minimatch } from 'minimatch';
 
 const openai = new OpenAIAPI();
 const cache = new Cache();
@@ -76,14 +77,13 @@ const transformSourceCode = async (
 	// Only include files listed in the include option
 	if (options.include) {
 		for (const include of options.include) {
-			if (!resourcePath.includes(include)) {
+			if (options.useGlob) {
+				if (!minimatch(resourcePath, include)) {
+					return source;
+				}
+			} else if (!resourcePath.includes(include)) {
 				return source;
 			}
-
-			// TODO: minimatch for glob patterns
-			// if (!minimatch(resourcePath, include)) {
-			// 	return source;
-			// }
 		}
 	}
 
