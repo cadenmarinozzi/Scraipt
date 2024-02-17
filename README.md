@@ -205,7 +205,7 @@ module.exports = {
 
 ## Functional Usage
 
-Scraipt can also be used easily with a functional approach. To do so, import `useScraipt` from the `scraipt` library and call it with your webpack configuration.
+Scraipt can also be used easily with a functional approach. To do so, import `useScraipt` from the `scraipt/functional` library and call it with your webpack configuration.
 
 `useScraipt(webpackConfig <optional Object>, options <optional Object>, framework <optional String>) => WebpackConfig`
 
@@ -228,7 +228,7 @@ Scraipt can also be used easily with a functional approach. To do so, import `us
 ### Example
 
 ```javascript
-const { useScraipt } = require('scraipt');
+const { useScraipt } = require('scraipt/functional');
 
 module.exports = useScraipt(
 	{
@@ -292,6 +292,8 @@ npm run build-dev # Development (Uses tsc)
 ```bash
 npm run build-production # Production (Uses webpack)
 ```
+
+The built project will be in the `dist` directory.
 
 ## Testing
 
